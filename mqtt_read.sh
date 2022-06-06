@@ -1,8 +1,18 @@
 #!/bin/bash
 
-ip=192.168.1.88
-port=1883
-topic="etxe/kobazulo/bombilla"
+#HOST=192.168.55.3
+HOST=$(cat dns.dir)
+PORT=1883
+TOPIC=$1
 
-mosquitto_sub -h $ip -p $port -t $topic
+echo "Topic: ${TOPIC}"
+
+if [ "${TOPIC}" = "" ];
+then
+	TOPIC="#"
+fi
+
+echo "Listening on topic ${TOPIC}..."
+
+mosquitto_sub -h $HOST -p $PORT -t $TOPIC
 
